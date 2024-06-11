@@ -1,6 +1,8 @@
 force_color_prompt=yes
 color_prompt=yes
 
-source ~/.local/bin/git-prompt.sh
+parse_git_branch() {
+  git branch --show-current 2>/dev/null | sed -e 's/\(.*\)/(\1)\ /'
+}
 
-PS1='[$?] \[\e[2m\]\t\[\e[0m\] \[\e[38;5;123;1m\]\W\[\e[0m\] \[\e[38;5;119;1m\]$(__git_ps1 " (%s)")\[\e[0m\]$ '
+export PS1='[$?] \[\e[2m\]\t\[\e[0m\] \[\e[38;5;123;1m\]\W\[\e[0m\] \[\e[38;5;119;1m\]$(parse_git_branch)\[\e[0m\]$ '
